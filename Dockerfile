@@ -13,13 +13,10 @@ RUN apt-get update && apt-get install -y \
 # Install PHP extensions
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 RUN docker-php-ext-install pdo_mysql mbstring
-
+WORKDIR /app
+COPY . /app
+RUN composer install
 # Set working directory
-WORKDIR /var/www
-
-COPY composer.json .
-RUN composer install --no-scripts
-COPY . .
 
 CMD php artisan serve --host=0.0.0.0 --port 80
-
+EXPOSE 80
