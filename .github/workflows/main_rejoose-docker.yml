@@ -23,14 +23,14 @@ jobs:
       uses: docker/login-action@v1
       with:
         registry: https://rejoosedocker.azurecr.io/
-        username: ${{ secrets.AzureAppService_ContainerUsername_2d93dcfd6368401189d0ec6773822cf2 }}
-        password: ${{ secrets.AzureAppService_ContainerPassword_d4f31c83eb9846999a9bc73077158336 }}
+        username: ${{ secrets.AzureAppService_ContainerUsername_f8374decb3644b63a19515037d178f08 }}
+        password: ${{ secrets.AzureAppService_ContainerPassword_64d69cc596784e3f8b1b326b141f9204 }}
 
     - name: Build and push container image to registry
       uses: docker/build-push-action@v2
       with:
         push: true
-        tags: rejoosedocker.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_2d93dcfd6368401189d0ec6773822cf2 }}/laravel-docker:${{ github.sha }}
+        tags: rejoosedocker.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_f8374decb3644b63a19515037d178f08 }}/rejoosedocker/laravel-docker:${{ github.sha }}
         file: ./Dockerfile
 
   deploy:
@@ -47,5 +47,5 @@ jobs:
       with:
         app-name: 'rejoose-docker'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_4b4b0c1598f74aceb2607c2a186d20f7 }}
-        images: 'rejoosedocker.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_2d93dcfd6368401189d0ec6773822cf2 }}/laravel-docker:${{ github.sha }}'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_dcd92ab0236c4b85a923c12e9ac411d8 }}
+        images: 'rejoosedocker.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_f8374decb3644b63a19515037d178f08 }}/rejoosedocker/laravel-docker:${{ github.sha }}'
